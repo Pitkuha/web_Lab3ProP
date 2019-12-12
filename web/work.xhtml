@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+<h:head>
+    <title>JSF Lab Work</title>
+    <h:outputStylesheet name="style-work.css" library="css"/>
+    <h:outputScript name="jquery-3.3.1.js" library="js"/>
+    <h:outputScript name="graphManager.js" library="js"/>
+</h:head>
+<h:body onload="redraw();">
+    <f:view>
+        <center>
+            <h:form id="myForm">
+
+                <div class="d-header">
+                    Введите данные для отправки на сервер
+                </div>
+                <h:commandButton type="submit"
+                                 value="SEND A POSTCARD"
+                                 action="#{result.addResult()}"
+                                 styleClass="link-go"
+                /><br/><br/>
+                <table id="ftable">
+                    <tr>
+                        <td>X</td><td>Y</td><td>R</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:selectOneMenu id="param-x" name="param-x" styleClass="selectX" layout="lineDirection" >
+                                <f:selectItem itemLabel="-4" itemValue="-4" />
+                                <f:selectItem itemLabel="-3" itemValue="-3" />
+                                <f:selectItem itemLabel="-2" itemValue="-2" />
+                                <f:selectItem itemLabel="-1" itemValue="-1" />
+                                <f:selectItem itemLabel="0" itemValue="0" />
+                                <f:selectItem itemLabel="1" itemValue="1" />
+                                <f:selectItem itemLabel="2" itemValue="2" />
+                                <f:selectItem itemLabel="3" itemValue="3" />
+                                <f:selectItem itemLabel="4" itemValue="4" />
+                            </h:selectOneMenu><h:message for="param-r" style="color:red"/>
+
+                        </td>
+                        <td>
+                            <h:inputText id="param-y" name="param-y" required="true" styleClass="inputY" maxlength="6" requiredMessage="введите значение">
+                                <f:validator validatorId="ValidatorY"/>
+                            </h:inputText><br/>
+                            <h:message for="param-y" style="color:red"/>
+                        </td>
+                        <td>
+                            <h:selectOneMenu id="param-r" name="param-r" styleClass="selectR" layout="lineDirection" onchange="redraw();" >
+                                <f:selectItem itemLabel="1" itemValue="1" />
+                                <f:selectItem itemLabel="2" itemValue="2" />
+                                <f:selectItem itemLabel="3" itemValue="3" />
+                                <f:selectItem itemLabel="4" itemValue="4" />
+                                <f:selectItem itemLabel="5" itemValue="5" />
+                            </h:selectOneMenu><h:message for="param-r" style="color:red"/>
+                        </td>
+                    </tr>
+
+                </table>
+                <p:remoteCommand name="sendClick"
+                                 action="#{result.checkClick()}" update="result-table" partialSubmit="true" process="@this"/>
+                <p:remoteCommand name="callRedraw"
+                                 action="#{result.callRedraw()}" update="result-table" partialSubmit="true" process="@this"/>
+            </h:form>
+
+            <br/>
+            <p:outputPanel id="runtime_panel" autoUpdate="true" />
+            <br/>
+            <canvas height="360px" width="360px" id="zoneCanvas" title="График" />
+            <h:outputScript name="mouseListener.js" library="js"/>
+            <h:outputScript name="mouseListener.js" library="js"/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h:form id="removeForm">
+                <h:commandButton type="submit"
+                                 value="REMOVE"
+                                 action="#{result.removeResult}"
+                                 styleClass="link-go"
+                />
+                <br/>
+                <br/>
+                <h:inputText id="param-id" name="param-id" styleClass="inputID" required="true" maxlength="6" requiredMessage="введите значение ID который хотите удалить">
+                    <f:validator validatorId="ValidatorID"/>
+                </h:inputText><br/>
+                <h:message for="param-id" style="color:red"/>
+                <p:remoteCommand name="callRedraw"
+                                 action="#{result.callRedraw()}" update="result-table" partialSubmit="true" process="@this"/>
+            </h:form>
+
+            <br/>
+            <br/>
+            <br/>
+            <h:dataTable value="#{result.allResults}" var="res"
+                         styleClass="article-table"
+                         rules="all" id="result-table">
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{res.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+                    #{res.x}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Y </f:facet>
+                    #{res.y}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+                    #{res.r}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Попадание</f:facet>
+                    #{res.ENTERING}
+                </h:column>
+            </h:dataTable><br/>
+            <h:link value="GO back" outcome="index" styleClass="link-go"/>
+        </center>
+    </f:view>
+</h:body>
+</html>

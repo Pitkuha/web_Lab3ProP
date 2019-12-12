@@ -1,0 +1,78 @@
+#ftable{
+    border-collapse: collapse;
+    border: 5px solid black;
+    text-align: center;
+    font-size: 15px;
+    width: 900px;
+}
+#ftable > tbody > tr > td{
+    border: 5px solid orange;
+    width: 33%;
+}
+.d-header{
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+.selectR{
+    display: inline-table;
+    width: 100%;
+    height: 100%;
+
+}
+.inputID{
+    width: 10%;
+    height: 10%;
+    font-size: 20px;
+    text-align: center;
+    border-width: 3px;
+    border-color: orange;
+    transition: 1s;
+}
+.inputID:focus{
+    background: #EEEEEE;
+    transition: 1s;
+}
+.inputY{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    text-align: center;
+    border: 0px;
+    transition: 1s;
+}
+.inputY:focus{
+    background: #EEEEEE;
+    transition: 1s;
+}
+.link-go{
+    transition: 0.3s ease-in-out;
+    font-size: 20px;
+    font-family: monospace;
+    border: 2px solid orange;
+    color:orange;
+    text-decoration: none;
+    background: white;
+}
+a.link-go{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.link-go:hover{
+    transition: 0.3s ease-in-out;
+    background: orange;
+    color: white;
+
+}
+.selectX{
+    background: white;
+    transition: 1s;
+    width: 100%;
+    height: 100%;
+}
+::selection{
+    background: black;
+    color: white;
+}
