@@ -118,8 +118,11 @@ public class ResultBean {
 
             try{
                 entityManager.getTransaction().begin();
-                //entityManager.createQuery("delete from Result e where e.id = :id").setParameter("id", id).executeUpdate();
-                entityManager.createNativeQuery("delete from RESULTS, RESULTSTWO where ID = :id").setParameter("id",id).executeUpdate();
+                entityManager.createNativeQuery("delete from RESULTS where ID =" + id).executeUpdate();
+                entityManager.getTransaction().commit();
+
+                entityManager.getTransaction().begin();
+                entityManager.createNativeQuery("delete from RESULTSTWO where ID =" + id).executeUpdate();
                 entityManager.getTransaction().commit();
             }catch (Exception e){
                 entityManager.getTransaction().rollback();
