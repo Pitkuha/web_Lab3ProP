@@ -3,6 +3,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <class>Und.Result</class>
+        <class>Und.ResultTwo</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
             <property name="javax.persistence.jdbc.url"    value="jdbc:oracle:thin:@localhost:1521:EC11" />

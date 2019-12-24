@@ -3,9 +3,12 @@ package Und;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "RESULTS")
+@SecondaryTable(name="RESULTSTWO")
 public class Result implements Serializable {
     private static final long serialVersionUID = -5170875020617735653L;
 
@@ -17,12 +20,18 @@ public class Result implements Serializable {
     private double X;
     @Column(name="Y")
     private double Y;
-    @Column(name="R")
+    @Column(name="R", table ="RESULTSTWO")
     private double R;
+    @Column(name="ENTERING", table="RESULTSTWO")
+    private boolean ENTERING;
     @Column(name="SESSIONID")
     private String SEESIONID;
-    @Column(name="ENTERING")
-    private boolean ENTERING;
+
+    //TODO ВОТ ЭТО ГОВНО
+//    @OneToMany(
+//            mappedBy = "RESULTS"
+//    )
+//    List<ResultTwo> rt;
 
     public Long getId() {
         return id;

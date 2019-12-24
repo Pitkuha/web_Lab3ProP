@@ -19,3 +19,8 @@ document.getElementById("zoneCanvas").addEventListener("click", function (e) {
         onPointCliecked(x,y,r);
     }
 });
+
+function updateR() {
+    let R = getR();
+    update([{name:'dbR', value: R}]);
+}
