@@ -30,7 +30,6 @@ public class ResultBean {
         FacesContext fCtx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(true);
         sessionID = session.getId();
-
     }
 
     public void checkClick(){
@@ -64,19 +63,6 @@ public class ResultBean {
             entityManager.getTransaction().rollback();
         }
 
-//        try{
-//            entityManager.getTransaction().begin();
-//            resultTwo.setR(r);
-//            resultTwo.setId(result.getId());
-//            resultTwo.setSESSIONID(sessionID);
-//            resultTwo.setENTERING(ParamsManager.isInArea(x, y, r));
-//
-//            resultTwo = entityManager.merge(resultTwo);
-//
-//            entityManager.getTransaction().commit();
-//        }catch (Exception e){
-//            entityManager.getTransaction().rollback();
-//        }
 
         String col;
         if (ParamsManager.isInArea(x,y,r)){
@@ -120,42 +106,21 @@ public class ResultBean {
                 entityManager.getTransaction().begin();
                 entityManager.createNativeQuery("delete from RESULTS where ID =" + id).executeUpdate();
                 entityManager.getTransaction().commit();
-
-                entityManager.getTransaction().begin();
-                entityManager.createNativeQuery("delete from RESULTSTWO where ID =" + id).executeUpdate();
-                entityManager.getTransaction().commit();
             }catch (Exception e){
                 entityManager.getTransaction().rollback();
             }
+
     }
 
     public List<Result> getAllResults(){
             entityManager.getTransaction().begin();
             @SuppressWarnings("unchecked")
-            //List<Result> Results = entityManager.createQuery("select a from Result e join e.rt a where e.SEESIONID = :id").setParameter("id",sessionID).getResultList();
-            //List<Result> Results = entityManager.createQuery("select e from Result e inner join ResultTwo a where e.SEESIONID = :id").setParameter("id",sessionID).getResultList();
-            //List<ResultTwo> ResultsTwo = entityManager.createQuery("select e from ResultTwo e where e.SESSIONID = :id").setParameter("id",sessionID).getResultList(;
-
-            //List<Result> Results = entityManager.createNativeQuery("SELECT * FROM RESULTS inner join RESULTSTWO ON RESULTS.id = RESULTSTWO.id", Re).getResultList();
-
             List<Result> Results = entityManager.createQuery("select e from Result e  where e.SEESIONID = :id").setParameter("id",sessionID).getResultList();
             entityManager.getTransaction().commit();
 
 
             //
 
-//        for (int i = 0; i < Results.size(); i++) {
-//            Result r = Results.get(i);
-//            for (int j = 0; j < ResultsTwo.size(); j++) {
-//                ResultTwo rt = ResultsTwo.get(i);
-//                if (r.getId() == rt.getId()){
-//                    r.setENTERING(rt.isENTERING());
-//                    break;
-//                }
-//            }
-//            r.setX(round(r.getX()));
-//            r.setY(round(r.getY()));;
-//        }
 
         for (int i = 0; i < Results.size(); i++) {
             Result r = Results.get(i);
@@ -199,7 +164,6 @@ public class ResultBean {
             float r = Float.parseFloat(sr);
 
             Result result = new Result();
-            //ResultTwo resultTwo = new ResultTwo();
             try{
                 entityManager.getTransaction().begin();
 
@@ -216,20 +180,6 @@ public class ResultBean {
             }catch (Exception e){
                 entityManager.getTransaction().rollback();
             }
-
-//            try{
-//                entityManager.getTransaction().begin();
-//                resultTwo.setR(r);
-//                resultTwo.setId(result.getId());
-//                resultTwo.setENTERING(ParamsManager.isInArea(x,y,r));
-//                resultTwo.setSESSIONID(sessionID);
-//
-//                resultTwo = entityManager.merge(resultTwo);
-//
-//                entityManager.getTransaction().commit();
-//            }catch (Exception e){
-//                entityManager.getTransaction().rollback();
-//            }
 
         }catch (Exception e){
             e.printStackTrace();

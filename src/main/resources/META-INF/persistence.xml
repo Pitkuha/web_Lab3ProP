@@ -3,15 +3,17 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <class>Und.Result</class>
-        <class>Und.ResultTwo</class>
+        <!--<class>Und.ResultTwo</class>-->
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
-            <property name="javax.persistence.jdbc.url"    value="jdbc:oracle:thin:@localhost:1521:EC11" />
-            <property name="javax.persistence.jdbc.user" value="sys as sysdba" />
-            <property name="javax.persistence.jdbc.password" value="ThorOdinson2000" />
+            <!--<property name="javax.persistence.jdbc.url"    value="jdbc:oracle:thin:@localhost:1521:EC11" />-->
+            <property name="javax.persistence.jdbc.url"    value="jdbc:oracle:thin:@localhost:1521:orbis" />
+            <!--<property name="javax.persistence.jdbc.user" value="sys as sysdba" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="ThorOdinson2000" />-->
+            <property name="javax.persistence.jdbc.user" value="s263884" />
+            <property name="javax.persistence.jdbc.password" value="qmu869" />
             <property name="eclipselink.ddl-generation" value="create-tables" />
             <property name="eclipselink.ddl-generation.output-mode" value="database" />
         </properties>
-
     </persistence-unit>
 </persistence>

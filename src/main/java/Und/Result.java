@@ -27,11 +27,6 @@ public class Result implements Serializable {
     @Column(name="SESSIONID")
     private String SEESIONID;
 
-    //TODO ВОТ ЭТО ГОВНО
-//    @OneToMany(
-//            mappedBy = "RESULTS"
-//    )
-//    List<ResultTwo> rt;
 
     public Long getId() {
         return id;
